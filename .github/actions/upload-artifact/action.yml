@@ -1,9 +1,18 @@
-###
+name: Upload artifact
+description: Subir imagen de docker al artifactory
+
+outputs:
+  artifact_id:
+    description: 'Id del artifact'
+    value: ${{ steps.version_name.outputs.version }}
+
 runs:
   using: 'composite'
   steps:
-    - name: Save Docker image
-      run: docker save --output image.tar "${autoria}"
+    - name: Random id
+      id: generate_id
+      run: echo "::set-output name=id::$(openssl rand -hex 12)"
+  
     - name: Upload Docker image
       uses: actions/upload-artifact@v4
       with:
