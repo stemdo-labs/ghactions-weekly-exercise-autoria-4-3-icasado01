@@ -40,6 +40,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           version: ${{ steps.version.outputs.version }}
+
+      - name: Upload artifact
+        uses: ./.github/actions/upload-artifact/
         
   deployment:
     needs: build-and-push
