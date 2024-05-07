@@ -9,10 +9,10 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Save Docker image
-      run: docker save --output image.tar "${autoria}"
-      shell: bash
-
+    - name: Random id
+      id: generate_id
+      run: echo "::set-output name=id::$(openssl rand -hex 12)"
+  
     - name: Upload Docker image
       uses: actions/upload-artifact@v4
       with:
