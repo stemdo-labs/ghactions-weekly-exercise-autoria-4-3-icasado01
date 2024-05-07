@@ -1,1 +1,12 @@
 ###
+runs:
+  using: 'composite'
+  steps:
+    - name: Save Docker image
+      run: docker save --output image.tar "${autoria}"
+    - name: Upload Docker image
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-image
+        path: image.tar
+        retention-days: 10
